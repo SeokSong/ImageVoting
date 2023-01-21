@@ -1,8 +1,8 @@
 window.onload = function(){ 
     let question = createQuestion();
+    var answerObject = new Answer(question);
     let questionText = "Which photo is the " + question + " ranges";
     var questionDisplay = document.getElementById("questionDisplay").innerHTML = questionText;
-    // document.getElementById('contact-number').innerHTML = PHONE_NUMBER_VALUE;
 
     var rightSide = document.getElementById("rightSide"),
     rightClicked = false;
@@ -11,6 +11,9 @@ window.onload = function(){
     leftClicked = false;
 
     var image = grabImages()
+    var answers = new questions(image[2], image[3]);
+
+    let answer = answers.correctAnswer(answerObject.getAnswer());
     const image1 = new Image();
     image1.src = image[0];
 
@@ -23,50 +26,84 @@ window.onload = function(){
     
     rightSide.onclick = function() {
     rightClicked = true;
-    var ans = "Correct";
+    var ans = correctAnswer("right", answer);
+
     rightSide.innerHTML = ans;
     };
     
     leftSide.onclick = function() {
     leftClicked = true;
-    var ans = "Correct";
+    var ans = correctAnswer("left", answer);
     leftSide.innerHTML = ans;
     };
 }
 
+function createQuestion(){
+    var folderIndex = createFolderIndex();
+    var question = folderKnowledge(folderIndex)
+    return question;
+}
 function folderKnowledge(index){
     const folderKnowledge = new Map();
     folderKnowledge.set(0, 'Appalachian');
     folderKnowledge.set(1, 'Rockys');
     return folderKnowledge.get(index)
 }
-
 function createFolderIndex(){
     return folderIndex = Math.floor(Math.random() * 2);
 }
-
 function createImageIndex(){
     return folderIndex = Math.floor(Math.random() * 5);
 }
-
-function createQuestion(){
-    var folderIndex = createFolderIndex();
-    return folderKnowledge(folderIndex);
-}
-
 function grabImages(){
     var folderIndex = createFolderIndex();
     var imageindex = createImageIndex();
     if(folderIndex == 0){
         var secondIndex = 1;
     }
+    else{
+        var secondIndex = 0;
+    }
     let baseFolderPath = "C:/Users/seokj/Code/ImageVoting/Images/";
     let folder = folderKnowledge(folderIndex)
     let folderTwo = folderKnowledge(secondIndex)
-    return [baseFolderPath + folderIndex + "/" + folder + imageindex + ".png", baseFolderPath + secondIndex + "/" + folderTwo + imageindex + ".png"];
+    
+    return [baseFolderPath + folderIndex + "/" + folder + imageindex + ".png", baseFolderPath + secondIndex + "/" + folderTwo + imageindex + ".png", folder, folderTwo];
+}
+function getLeftRightFolders(){
+    return [this.left, this.right];
+}
+function correctAnswer(choice, answer){
+    if(choice == answer){
+        return "Correct";
+    }
+    else{
+        return "Incorrect";
+    }
+} 
+
+class Answer{
+    constructor(answer, folder){
+        this.answer = answer;
+    }
+
+    getAnswer(){
+        return this.answer;
+    }
 }
 
-function correctAnswer(ans){
+class questions{
+    constructor(left, right){
+        this.left = left;
+        this.right = right;
+    }
 
-    return 
+    correctAnswer(answer){
+        if(answer == this.left){
+            return "left";
+        }
+        else{
+            return "right";
+        }
+    }
 }
