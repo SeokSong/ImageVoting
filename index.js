@@ -10,11 +10,13 @@ window.onload = function(){
     var leftSide = document.getElementById("leftSide"),
     leftClicked = false;
 
+    var image = grabImages()
     const image1 = new Image();
-    image1.src = grabImage();
+    image1.src = image[0];
 
     const image2 = new Image();
-    image2.src = grabImage();
+    
+    image2.src = image[1];
 
     rightSide.appendChild(image1);
     leftSide.appendChild(image2);
@@ -52,12 +54,16 @@ function createQuestion(){
     return folderKnowledge(folderIndex);
 }
 
-function grabImage(){
+function grabImages(){
     var folderIndex = createFolderIndex();
     var imageindex = createImageIndex();
+    if(folderIndex == 0){
+        var secondIndex = 1;
+    }
     let baseFolderPath = "C:/Users/seokj/Code/ImageVoting/Images/";
     let folder = folderKnowledge(folderIndex)
-    return baseFolderPath + folderIndex + "/" + folder + imageindex + ".png";
+    let folderTwo = folderKnowledge(secondIndex)
+    return [baseFolderPath + folderIndex + "/" + folder + imageindex + ".png", baseFolderPath + secondIndex + "/" + folderTwo + imageindex + ".png"];
 }
 
 function correctAnswer(ans){
