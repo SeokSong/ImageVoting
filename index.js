@@ -11,7 +11,7 @@ window.onload = function(){
     leftClicked = false;
 
     var image = grabImages()
-    var answers = new questions(image[2], image[3]);
+    var answers = new questions(image[3], image[2]);
 
     let answer = answers.correctAnswer(answerObject.getAnswer());
     const image1 = new Image();

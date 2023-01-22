@@ -28,7 +28,7 @@
   text-align: center;
 }
 
-button {
+/* button {
   padding: 20px;
   background: transparent;
   text-shadow: 1px 1px 1px #202020;
@@ -36,4 +36,20 @@ button {
   font-size: 18pt;
   border: 1px solid lightblue;
   color: lightblue;
-}
+} */
+
+.button {
+    width: 400px;
+    height: 300px;
+    background: transparent;
+    align-items: center;
+    outline: none;
+    border: none;
+    margin: auto;
+    /* justify-content: center; */
+  }
+  .button img {
+    width: 400px;
+    height: 300px;
+  }
+  
