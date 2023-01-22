@@ -27,15 +27,14 @@ window.onload = function(){
     rightSide.onclick = function() {
     rightClicked = true;
     var ans = correctAnswer("right", answer);
-
-    rightSide.innerHTML = ans;
+    document.getElementById("myPopup").innerHTML = ans;
     };
     
     leftSide.onclick = function() {
     leftClicked = true;
     var ans = correctAnswer("left", answer);
-    leftSide.innerHTML = ans;
-    };
+    document.getElementById("myPopup").innerHTML = ans;
+    }
 }
 
 function createQuestion(){
@@ -81,6 +80,21 @@ function correctAnswer(choice, answer){
         return "Incorrect";
     }
 } 
+
+function closePopup() {
+    popupBox.style.display = "none";
+  }
+  
+  // Function to change the text in the popup
+function changePopupText(newText) {
+    var popupText = document.getElementById("popup-text");
+    popupText.innerHTML = newText;
+}
+
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+  }
 
 class Answer{
     constructor(answer, folder){
